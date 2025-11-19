@@ -37,18 +37,11 @@ class BlokSeeder extends Seeder
             'slug' => 'blok-c',
         ]);
 
-        $blokD = Blok::create([
-            'id' => (string) Str::uuid(),
-            'nama' => 'Blok D',
-            'deskripsi' => 'Blok D dekat masjid',
-            'slug' => 'blok-d',
-        ]);
-
         // Kapling untuk Blok A
-        foreach (range(1, 5) as $i) {
+        foreach (range(1, 89) as $i) {
             Kapling::create([
                 'id' => (string) Str::uuid(),
-                'nama' => "Kapling A{$i}",
+                'nama' => "A{$i}",
                 'deskripsi' => "Kapling nomor {$i} di Blok A",
                 'slug' => "kapling-a{$i}",
                 'blok_id' => $blokA->id,
@@ -56,10 +49,10 @@ class BlokSeeder extends Seeder
         }
 
         // Kapling untuk Blok B
-        foreach (range(1, 5) as $i) {
+        foreach (range(1, 59) as $i) {
             Kapling::create([
                 'id' => (string) Str::uuid(),
-                'nama' => "Kapling B{$i}",
+                'nama' => "B{$i}",
                 'deskripsi' => "Kapling nomor {$i} di Blok B",
                 'slug' => "kapling-b{$i}",
                 'blok_id' => $blokB->id,
@@ -67,24 +60,13 @@ class BlokSeeder extends Seeder
         }
 
         // Kapling untuk Blok C
-        foreach (range(1, 3) as $i) {
+        foreach (range(1, 50) as $i) {
             Kapling::create([
                 'id' => (string) Str::uuid(),
-                'nama' => "Kapling C{$i}",
+                'nama' => "C{$i}",
                 'deskripsi' => "Kapling nomor {$i} di Blok C",
                 'slug' => "kapling-c{$i}",
                 'blok_id' => $blokC->id,
-            ]);
-        }
-
-        // Kapling untuk Blok D
-        foreach (range(1, 4) as $i) {
-            Kapling::create([
-                'id' => (string) Str::uuid(),
-                'nama' => "Kapling D{$i}",
-                'deskripsi' => "Kapling nomor {$i} di Blok D",
-                'slug' => "kapling-d{$i}",
-                'blok_id' => $blokD->id,
             ]);
         }
     }
