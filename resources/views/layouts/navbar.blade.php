@@ -63,7 +63,7 @@
 
                         <ul class="py-1" aria-labelledby="navUserdata">
                             <li>
-                                <a href="{{ route('admin.update-profil.index') }}"
+                                <a href="#}"
                                     class="flex items-center py-2 px-3 text-sm text-gray-700 hover:bg-gray-50
                           dark:text-gray-200 dark:hover:bg-gray-900/20
                           dark:hover:text-white">
@@ -72,7 +72,7 @@
                                     Profile</a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.update-profil.index') }}"
+                                <a href="#}"
                                     class="flex items-center py-2 px-3 text-sm text-gray-700 hover:bg-gray-50
                           dark:text-gray-200 dark:hover:bg-gray-900/20
                           dark:hover:text-white">

@@ -15,84 +15,171 @@
              <span class="text-black dark:text-slate-300">Dahsboard</span>
          </a>
 
-         {{-- Banner --}}
-         <a href="{{ route('admin.banner.index') }}"
+         {{-- Vendor --}}
+         <a href="{{ route('admin.vendor.index') }}"
              class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-black"
              data-fc-parent="parent-accordion">
              <span data-lucide="image-plus"
                  class="w-5 h-5 text-center text-slate-600 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-600"></span>
-             <span class="text-black dark:text-slate-300">Banner</span>
+             <span class="text-black dark:text-slate-300">Vendor</span>
          </a>
 
-         {{-- Pelayanan Publik --}}
-         <a href="{{ route('admin.pelayanan-publik.index') }}"
+         {{-- Aplikator --}}
+         <a href="{{ route('admin.aplikator.index') }}"
              class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-black"
              data-fc-parent="parent-accordion">
              <span data-lucide="book-open-check"
                  class="w-5 h-5 text-center text-slate-600 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-600"></span>
-             <span class="text-black dark:text-slate-300">Pelayanan Publik</span>
+             <span class="text-black dark:text-slate-300">Aplikator</span>
          </a>
 
-         {{-- Sub Pelayanan Publik --}}
-         <a href="{{ route('admin.sub-pelayanan-publik.index') }}"
+         {{-- Material --}}
+         <a href="{{ route('admin.material.index') }}"
              class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-black"
              data-fc-parent="parent-accordion">
              <span data-lucide="ice-cream-2"
                  class="w-5 h-5 text-center text-slate-600 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-600"></span>
-             <span class="text-black dark:text-slate-300">Sub Pelayanan Publik</span>
+             <span class="text-black dark:text-slate-300">Material</span>
          </a>
 
-         {{-- Menu Profil --}}
-         <a href="{{ route('admin.profil.index') }}"
+         {{-- Purchase Order  --}}
+         <a href="{{ route('admin.purchase-order.index') }}"
              class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-black"
              data-fc-parent="parent-accordion">
              <span data-lucide="building-2"
                  class="w-5 h-5 text-center text-slate-600 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-600"></span>
-             <span class="text-black dark:text-slate-300">Menu Profil</span>
+             <span class="text-black dark:text-slate-300">Purchase Order </span>
          </a>
 
 
-         {{-- Berita --}}
+         {{-- Bukti Penerimaan Barang  --}}
+         <a href=""
+             class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-black"
+             data-fc-parent="parent-accordion">
+             <span data-lucide="ice-cream-2"
+                 class="w-5 h-5 text-center text-slate-600 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-600"></span>
+             <span class="text-black dark:text-slate-300">Bukti Penerimaan Barang</span>
+         </a>
+
+
+         {{-- Permintaan Material  --}}
+         <a href=""
+             class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-black"
+             data-fc-parent="parent-accordion">
+             <span data-lucide="ice-cream-2"
+                 class="w-5 h-5 text-center text-slate-600 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-600"></span>
+             <span class="text-black dark:text-slate-300">Permintaan Material</span>
+         </a>
+
+         {{-- Stok --}}
          <a href="#"
-             class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200 flex items-center decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-black "
+             class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-black"
              data-fc-type="collapse" data-fc-parent="parent-accordion">
-             <span data-lucide="network"
-                 class="w-5 h-5 text-center text-slate-600 dark:text-slate-400 me-2 group-data-[sidebar=dark]:text-black group-data-[sidebar=brand]:text-slate-600"></span>
-             <span class="text-black dark:text-slate-300">Berita</span>
+             <span data-lucide="lock"
+                 class="w-5 h-5 text-center text-slate-600 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-600"></span>
+             <span class="text-black dark:text-slate-300">Stok</span>
              <i
-                 class="icofont-thin-down ms-auto inline-block text-[14px] transform transition-transform duration-300 text-black dark:text-slate-400 group-data-[sidebar=dark]:text-black group-data-[sidebar=brand]:text-black fc-collapse-open:rotate-180 "></i>
+                 class="icofont-thin-down  fc-collapse-open:rotate-180 ms-auto inline-block text-[14px] transform transition-transform duration-300 text-black dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-600"></i>
          </a>
-
-         {{-- Berita --}}
-         <div id="holding-flush" class="hidden  overflow-hidden">
+         <div id="Authentication-flush" class="hidden  overflow-hidden" aria-labelledby="Authentication">
              <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2">
                  <li class="nav-item relative block">
-                     <a href="{{ route('admin.post.index') }}"
-                         class="nav-link text-slate-600 dark:text-slate-300 hover:text-black rounded-md dark:hover:text-primary-500 relative   flex items-center decoration-0 px-3 py-3 group-data-[sidebar=brand]:hover:text-slate-600">
+                     <a href="{{ route('admin.role.index') }}"
+                         class="nav-link text-slate-600 dark:text-slate-300 hover:text-black rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-black   flex items-center decoration-0 px-3 py-3">
                          <i
-                             class="icofont-dotted-right me-2 text-black text-[8px] group-data-[sidebar=brand]:text-slate-600 "></i>
-                         Post
+                             class="icofont-dotted-right me-2 text-black text-[8px] group-data-[sidebar=brand]:text-slate-600"></i>
+                         Stok Masuk
                      </a>
                  </li>
                  <li class="nav-item relative block">
-                     <a href="{{ route('admin.categories.index') }}"
-                         class="nav-link text-slate-600 dark:text-slate-300 hover:text-black rounded-md dark:hover:text-primary-500 relative   flex items-center decoration-0 px-3 py-3 group-data-[sidebar=brand]:hover:text-slate-600">
+                     <a href="{{ route('admin.role.index') }}"
+                         class="nav-link text-slate-600 dark:text-slate-300 hover:text-black rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-black   flex items-center decoration-0 px-3 py-3">
                          <i
-                             class="icofont-dotted-right me-2 text-black text-[8px] group-data-[sidebar=brand]:text-slate-600 "></i>
-                         Kategori
+                             class="icofont-dotted-right me-2 text-black text-[8px] group-data-[sidebar=brand]:text-slate-600"></i>
+                         Stok Keluar
                      </a>
                  </li>
              </ul>
          </div>
 
-         {{-- user --}}
-         <a href="{{ route('admin.update-profil.index') }}"
+         {{-- Perumahan --}}
+         <a href="#"
+             class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-black"
+             data-fc-type="collapse" data-fc-parent="parent-accordion">
+             <span data-lucide="home"
+                 class="w-5 h-5 text-center text-slate-600 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-600"></span>
+             <span class="text-black dark:text-slate-300">Perumahan</span>
+             <i
+                 class="icofont-thin-down  fc-collapse-open:rotate-180 ms-auto inline-block text-[14px] transform transition-transform duration-300 text-black dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-600"></i>
+         </a>
+         <div id="Authentication-flush" class="hidden  overflow-hidden" aria-labelledby="Authentication">
+             <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2">
+                 <li class="nav-item relative block">
+                     <a href="{{ route('admin.project.index') }}"
+                         class="nav-link text-slate-600 dark:text-slate-300 hover:text-black rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-black   flex items-center decoration-0 px-3 py-3">
+                         <i
+                             class="icofont-dotted-right me-2 text-black text-[8px] group-data-[sidebar=brand]:text-slate-600"></i>
+                         Perumahan
+                     </a>
+                 </li>
+                 <li class="nav-item relative block">
+                     <a href="{{ route('admin.blok.index') }}"
+                         class="nav-link text-slate-600 dark:text-slate-300 hover:text-black rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-black   flex items-center decoration-0 px-3 py-3">
+                         <i
+                             class="icofont-dotted-right me-2 text-black text-[8px] group-data-[sidebar=brand]:text-slate-600"></i>
+                         Blok
+                     </a>
+                 </li>
+                 <li class="nav-item relative block">
+                     <a href="{{ route('admin.kapling.index') }}"
+                         class="nav-link text-slate-600 dark:text-slate-300 hover:text-black rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-black   flex items-center decoration-0 px-3 py-3">
+                         <i
+                             class="icofont-dotted-right me-2 text-black text-[8px] group-data-[sidebar=brand]:text-slate-600"></i>
+                         Kapling
+                     </a>
+                 </li>
+             </ul>
+         </div>
+
+
+
+         {{-- Tahapan Pengerjaan  --}}
+         <a href=""
              class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-black"
              data-fc-parent="parent-accordion">
-             <span data-lucide="users"
+             <span data-lucide="ice-cream-2"
                  class="w-5 h-5 text-center text-slate-600 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-600"></span>
-             <span class="text-black dark:text-slate-300">User Profil</span>
+             <span class="text-black dark:text-slate-300">Tahapan Pengerjaan</span>
          </a>
+
+         {{-- setting --}}
+         <a href="#"
+             class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-black"
+             data-fc-type="collapse" data-fc-parent="parent-accordion">
+             <span data-lucide="lock"
+                 class="w-5 h-5 text-center text-slate-600 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-600"></span>
+             <span class="text-black dark:text-slate-300">Settings</span>
+             <i
+                 class="icofont-thin-down  fc-collapse-open:rotate-180 ms-auto inline-block text-[14px] transform transition-transform duration-300 text-black dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-600"></i>
+         </a>
+         <div id="Authentication-flush" class="hidden  overflow-hidden" aria-labelledby="Authentication">
+             <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2">
+                 <li class="nav-item relative block">
+                     <a href="{{ route('admin.role.index') }}"
+                         class="nav-link text-slate-600 dark:text-slate-300 hover:text-black rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-black   flex items-center decoration-0 px-3 py-3">
+                         <i
+                             class="icofont-dotted-right me-2 text-black text-[8px] group-data-[sidebar=brand]:text-slate-600"></i>
+                         Role
+                     </a>
+                     <a href="{{ route('admin.user.index') }}"
+                         class="nav-link text-slate-600 dark:text-slate-300 hover:text-black rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-black   flex items-center decoration-0 px-3 py-3">
+                         <i
+                             class="icofont-dotted-right me-2 text-black text-[8px] group-data-[sidebar=brand]:text-slate-600"></i>
+                         User
+                     </a>
+                 </li>
+             </ul>
+         </div>
 
          {{-- logout --}}
          <hr class="mt-5">
