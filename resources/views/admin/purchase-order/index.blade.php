@@ -165,6 +165,9 @@
     <!-- JS -->
     <script src="{{ asset('design-system/assets/libs/mobius1-selectr/selectr.min.js') }}"></script>
     <script src="{{ asset('design-system/assets/js/pages/form-advanced.init.js') }}"></script>
+    <script>
+        const materialOptions = @json($materials);
+    </script>
     <script type="text/javascript">
         new Selectr('#status');
         new Selectr('#vendor_id');
@@ -252,6 +255,8 @@
 
                 let subTotal = jumlah_diminta * harga_satuan;
                 let existingMaterial = selectMaterial.find(item => item.material_id === material_id);
+                const materialId = document.getElementById('material_id').value;
+                const materialNama = materialOptions[materialId] || '—';
 
                 if (existingMaterial) {
                     existingMaterial.jumlah_diminta += jumlah_diminta;
@@ -263,6 +268,7 @@
                         status: status,
                         catatan: catatan,
                         material_id: material_id,
+                        material_nama: materialNama,
                         jumlah_diminta: jumlah_diminta,
                         harga_satuan: harga_satuan,
                         total_harga: subTotal,
@@ -301,12 +307,10 @@
                 }
 
                 selectMaterial.forEach((item, index) => {
-                    console.log(item);
-
                     let row = `
                     <tr>
                         <td class="text-left ps-2">${index + 1}</td>
-                        <td class="text-left ps-2">${item.material_id}</td>
+                        <td class="text-left ps-2">${item.material_nama}</td>
                         <td class="text-left ps-2">${item.jumlah_diminta}</td>
                         <td class="text-left ps-2">${numberFormat.format(item.harga_satuan)}</td>
                         <td class="text-left ps-2">${numberFormat.format(item.total_harga)}</td>
@@ -348,7 +352,17 @@
                     dataType: "JSON",
                     success: function(response) {
                         if (response.success) {
-                            window.location.href = response.redirect;
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Perhatian',
+                                text: 'Input berhasil disimpan!',
+                                timer: 3000,
+                                showConfirmButton: false
+                            }).then(() => {
+                                // redirect setelah alert selesai / ditutup
+                                window.location.href = response.redirect;
+                            });
+
                         }
                     },
                     error: function(xhr) {

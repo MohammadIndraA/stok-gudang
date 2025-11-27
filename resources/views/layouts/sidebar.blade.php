@@ -53,7 +53,7 @@
 
 
          {{-- Bukti Penerimaan Barang  --}}
-         <a href=""
+         <a href="{{ route('admin.penerimaan-material.index') }}"
              class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-black"
              data-fc-parent="parent-accordion">
              <span data-lucide="ice-cream-2"
@@ -84,7 +84,7 @@
          <div id="Authentication-flush" class="hidden  overflow-hidden" aria-labelledby="Authentication">
              <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2">
                  <li class="nav-item relative block">
-                     <a href="{{ route('admin.role.index') }}"
+                     <a href="{{ route('admin.masuk.index') }}"
                          class="nav-link text-slate-600 dark:text-slate-300 hover:text-black rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-black   flex items-center decoration-0 px-3 py-3">
                          <i
                              class="icofont-dotted-right me-2 text-black text-[8px] group-data-[sidebar=brand]:text-slate-600"></i>
@@ -92,7 +92,7 @@
                      </a>
                  </li>
                  <li class="nav-item relative block">
-                     <a href="{{ route('admin.role.index') }}"
+                     <a href="{{ route('admin.keluar.index') }}"
                          class="nav-link text-slate-600 dark:text-slate-300 hover:text-black rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-black   flex items-center decoration-0 px-3 py-3">
                          <i
                              class="icofont-dotted-right me-2 text-black text-[8px] group-data-[sidebar=brand]:text-slate-600"></i>

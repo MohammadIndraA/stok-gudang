@@ -8,8 +8,12 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\BlokController;
+use App\Http\Controllers\Admin\GoodsReceiptItemController;
+use App\Http\Controllers\Admin\GoodsReceiptNoteController;
 use App\Http\Controllers\Admin\KaplingController;
 use App\Http\Controllers\Admin\PurchaseOrderItemController;
+use App\Http\Controllers\Admin\StokTransactionController;
+use App\Models\StokTransaction;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -47,6 +51,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
         // Route Purchase Order Item
         Route::resource('purchase-order-item', PurchaseOrderItemController::class);
+        
+        // Route Purchase Order 
+        Route::resource('penerimaan-material', GoodsReceiptNoteController::class);
+        
+        // Route Purchase Order Item
+        Route::resource('penerimaan-material-item', GoodsReceiptItemController::class);
+
+        // stok
+        Route::get('/masuk',[StokTransactionController::class, 'stokMasuk'])->name('masuk.index');
+        Route::get('/keluar',[StokTransactionController::class, 'stokKeluar'])->name('keluar.index');
 
     });
 });

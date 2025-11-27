@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class PurchaseOrder extends Model
 {
-        use HasUuids;
+    use HasUuids;
 
     protected $keyType = 'string';
     public $incrementing = false;
 
-        protected $fillable = [ 'nomor_po', 'vendor_id', 'status', 'diajukan_oleh', 'disetujui_oleh','catatan'];
+    protected $fillable = ['nomor_po', 'vendor_id', 'status', 'diajukan_oleh', 'disetujui_oleh', 'catatan'];
 
-        protected static function boot()
+    protected static function boot()
     {
         parent::boot();
 
@@ -54,9 +54,13 @@ class PurchaseOrder extends Model
         return $this->belongsTo(Vendor::class);
     }
 
-   public function items()
+    public function items()
     {
-        return $this->hasMany(PurchaseOrderItem::class, 'po_id'); 
+        return $this->hasMany(PurchaseOrderItem::class, 'po_id');
     }
 
+    public function receipts()
+    {
+        return $this->hasMany(GoodsReceiptNote::class, 'po_id');
+    }
 }

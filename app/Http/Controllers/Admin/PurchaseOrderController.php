@@ -16,20 +16,20 @@ use Illuminate\Support\Facades\DB;
 
 class PurchaseOrderController extends Controller
 {
-       protected $service;
+    protected $service;
 
     public function __construct(PurchaseOrderService $service)
     {
         $this->service = $service;
     }
 
-     public static function middleware()
+    public static function middleware()
     {
         return [
-             new Middleware('permission:view-purchase-order', ['only' => ['index','show']]),
-             new Middleware('permission:create-purchase-order', ['only' => ['create','store']]),
-             new Middleware('permission:edit-purchase-order', ['only' => ['edit','update']]),
-             new Middleware('permission:delete-purchase-order', ['only' => ['destroy']]),
+            new Middleware('permission:view-purchase-order', ['only' => ['index', 'show']]),
+            new Middleware('permission:create-purchase-order', ['only' => ['create', 'store']]),
+            new Middleware('permission:edit-purchase-order', ['only' => ['edit', 'update']]),
+            new Middleware('permission:delete-purchase-order', ['only' => ['destroy']]),
         ];
     }
 
@@ -37,45 +37,45 @@ class PurchaseOrderController extends Controller
     {
         // $this->authorize('viewAny', User::class);
         if ($request->ajax()) {
-        $vendors = $this->service->getAll();
-        return DataTables::of($vendors)
-            ->addIndexColumn()
-             ->editColumn('vendor_id', function ($row){
-                return $row->vendor->nama;
-            })
-             ->addColumn('status', function($row) {
+            $vendors = $this->service->getAll();
+            return DataTables::of($vendors)
+                ->addIndexColumn()
+                ->editColumn('vendor_id', function ($row) {
+                    return $row->vendor->nama;
+                })
+                ->addColumn('status', function ($row) {
                     if ($row->status === 'draft') {
                         return '<span class="bg-slate-500/10 text-slate-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded-full">draft</span>';
-                    } else if($row->status === 'diajukan') {
+                    } else if ($row->status === 'diajukan') {
                         return '<span class="bg-yellow-500/10 text-yellow-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded-full">diajukan</span>';
-                    }else if($row->status === 'disetujui') {
+                    } else if ($row->status === 'disetujui') {
                         return '<span class="bg-green-500/10 text-green-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded-full">disetujui</span>';
-                    }else if($row->status === 'dibatalkan') {
+                    } else if ($row->status === 'dibatalkan') {
                         return '<span class="bg-red-500/10 text-red-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded-full">dibatalkan</span>';
                     }
                 })
-            ->addColumn('action', function ($row) {
-                return view('components.button-action', [
-                    'id' => $row->id,
-                    'routeEdit' => 'admin.purchase-order.edit',
-                    'routeDelete' => 'admin.purchase-order.destroy',
-                    'dataTable' => 'purchaseOrderTable',
-                    'model' => $row
-                ])->render();
-            })
-           ->rawColumns(['action','status','vendor_id'])
-            ->make(true);
+                ->addColumn('action', function ($row) {
+                    return view('components.button-action', [
+                        'id' => $row->id,
+                        'routeEdit' => 'admin.purchase-order.edit',
+                        'routeDelete' => 'admin.purchase-order.destroy',
+                        'dataTable' => 'purchaseOrderTable',
+                        'model' => $row
+                    ])->render();
+                })
+                ->rawColumns(['action', 'status', 'vendor_id'])
+                ->make(true);
         }
         $vendors = $this->service->getVendor();
         $materials = $this->service->getMaterial();
-        return view('admin.purchase-order.index', compact('vendors','materials'));
+        return view('admin.purchase-order.index', compact('vendors', 'materials'));
     }
 
     public function create()
     {
         return view('admin.purchase-order.form');
     }
-   public function store(PurchaseOrderRequest $request)
+    public function store(PurchaseOrderRequest $request)
     {
         DB::beginTransaction();
         try {
@@ -107,6 +107,7 @@ class PurchaseOrderController extends Controller
 
             return response()->json([
                 'success'  => true,
+                'message'  => 'Purchase Order berhasil disimpan!',
                 'redirect' => route('admin.purchase-order.index')
             ]);
         } catch (\Throwable $th) {
@@ -123,7 +124,7 @@ class PurchaseOrderController extends Controller
         $vendor = $this->service->find($id);
         if (!$vendor) {
             return ResponseJson::error('Purchase Order tidak ditemukan', 404);
-         }
+        }
         return ResponseJson::success($vendor, 'Purchase Order found successfully');
     }
 
@@ -132,11 +133,11 @@ class PurchaseOrderController extends Controller
         $vendor = $this->service->find($id);
         if (!$vendor) {
             return ResponseJson::error('Purchase Order tidak ditemukan', 404);
-         }
+        }
         return view('admin.purchase-order.form', compact('vendor'));
     }
 
-   public function update(PurchaseOrderRequest $request, string $id)
+    public function update(PurchaseOrderRequest $request, string $id)
     {
         try {
             $data = $request->validated();
@@ -149,7 +150,7 @@ class PurchaseOrderController extends Controller
             $this->service->update($id, $data);
 
             return redirect()->route('admin.purchase-order.index')
-                             ->with('success', 'Data berhasil diperbarui');
+                ->with('success', 'Data berhasil diperbarui');
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return ResponseJson::error($th->getMessage(), 500);
@@ -159,7 +160,7 @@ class PurchaseOrderController extends Controller
     public function destroy($id)
     {
         try {
-             $deleted = $this->service->delete($id);
+            $deleted = $this->service->delete($id);
             if (!$deleted) {
                 return ResponseJson::error('Purchase Order tidak ditemukan atau gagal dihapus', 404);
             }

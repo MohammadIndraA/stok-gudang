@@ -14,13 +14,18 @@ class PurchaseOrderItem extends Model
 
     protected $fillable = ['po_id', 'material_id', 'jumlah_diminta', 'harga_satuan', 'total_harga'];
 
-     public function po()
+    public function po()
     {
         return $this->belongsTo(PurchaseOrder::class, 'po_id');
     }
 
-     public function material()
+    public function material()
     {
         return $this->belongsTo(Material::class, 'material_id');
+    }
+
+    public function receipts()
+    {
+        return $this->hasMany(GoodsReceiptItem::class, 'po_item_id');
     }
 }

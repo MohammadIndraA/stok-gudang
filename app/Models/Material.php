@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Material extends Model
 {
-        use HasUuids;
+    use HasUuids;
 
     protected $keyType = 'string';
     public $incrementing = false;
@@ -20,7 +20,7 @@ class Material extends Model
         'stok_minimum',
     ];
 
-      protected static function boot()
+    protected static function boot()
     {
         parent::boot();
 
@@ -45,5 +45,4 @@ class Material extends Model
 
         return 'MTL' . str_pad($newNumber, 5, '0', STR_PAD_LEFT);
     }
-    
 }

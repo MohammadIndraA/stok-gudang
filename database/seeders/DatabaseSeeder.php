@@ -19,17 +19,6 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        $this->call([
-            PermissionSeeder::class,
-            RoleSeeder::class,  
-            AplikatorSeeder::class,
-            BlokSeeder::class
-        ]);
-
         User::create([
             'nama_lengkap' => fake()->name(),
             'tempat_lahir' => fake()->city(),
@@ -45,6 +34,13 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ])->assignRole('Super Admin');
 
-
+        $this->call([
+            // PermissionSeeder::class,
+            // RoleSeeder::class,
+            // AplikatorSeeder::class,
+            // BlokSeeder::class,
+            // MaterialSeeder::class,
+            // VendorSeeder::class
+        ]);
     }
 }

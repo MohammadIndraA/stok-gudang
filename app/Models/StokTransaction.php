@@ -11,4 +11,16 @@ class StokTransaction extends Model
 
     protected $keyType = 'string';
     public $incrementing = false;
+
+    protected $guarded = [];
+
+    public function material()
+    {
+        return $this->belongsTo(Material::class);
+    }
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
 }
