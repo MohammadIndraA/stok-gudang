@@ -19,6 +19,15 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        $this->call([
+            PermissionSeeder::class,
+            RoleSeeder::class,
+            AplikatorSeeder::class,
+            BlokSeeder::class,
+            // MaterialSeeder::class,
+            VendorSeeder::class
+        ]);
+
         User::create([
             'nama_lengkap' => fake()->name(),
             'tempat_lahir' => fake()->city(),
@@ -33,14 +42,5 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ])->assignRole('Super Admin');
-
-        $this->call([
-            // PermissionSeeder::class,
-            // RoleSeeder::class,
-            // AplikatorSeeder::class,
-            // BlokSeeder::class,
-            // MaterialSeeder::class,
-            // VendorSeeder::class
-        ]);
     }
 }

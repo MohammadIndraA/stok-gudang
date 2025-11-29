@@ -38,6 +38,9 @@ class GoodsReceiptNoteController extends Controller
                 ->editColumn('waktu', function ($row) {
                     return $row->created_at->locale('id')->translatedFormat('l, d F Y H:i') ?? '-';
                 })
+                ->editColumn('catatan', function ($row) {
+                    return $row->catatan ?? '-';
+                })
                 ->addColumn('status', function ($row) {
                     if ($row->status === 'draft') {
                         return '<span class="bg-slate-500/10 text-slate-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded-full">draft</span>';
@@ -50,7 +53,7 @@ class GoodsReceiptNoteController extends Controller
                     }
                 })
 
-                ->rawColumns(['status', 'vendor_id', 'waktu'])
+                ->rawColumns(['status', 'vendor_id', 'waktu', 'catatan'])
                 ->make(true);
         }
 
@@ -59,6 +62,7 @@ class GoodsReceiptNoteController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         DB::beginTransaction();
 
         try {

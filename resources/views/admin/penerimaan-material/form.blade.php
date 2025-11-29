@@ -73,7 +73,9 @@
                                  @endif
                                  <th class="p-3 text-xs font-medium text-left">Harga satuan</th>
                                  <th class="p-3 text-xs font-medium text-left">Total harga</th>
-                                 <th class="p-3 text-xs font-medium text-center w-24">Action</th>
+                                 @if (!$poSelesai)
+                                     <th class="p-3 text-xs font-medium text-center w-24">Action</th>
+                                 @endif
                              </tr>
                          </thead>
                          <tbody id="poTableBody" class="divide-y divide-slate-200 dark:divide-slate-700"></tbody>
@@ -126,16 +128,21 @@
                  currency: 'IDR'
              });
 
+             //  nilai hasil yang diterima
+             const grouped = {};
+
              // Ambil semua item dari PO (server-side)
              let itemPO = @json($itemPO).map(i => ({
                  id: i.id,
                  material_id: i.material_id,
                  material_nama: i.material_nama ?? '-',
                  jumlah_diminta: Number(i.jumlah_diminta) || 0,
-                 jumlah_diterima: Number(i.jumlah_diterima) || 0, // total sudah diterima
+                 jumlah_diterima: Number(i.jumlah_sisa) === 0 ? 0 : Number(i
+                     .jumlah_diterima), // total sudah diterima
                  jumlah_sisa: Number(i.jumlah_sisa) || 0, // default untuk input baru
                  harga_satuan: Number(i.harga_satuan) || 0,
-                 total_harga: Number(i.jumlah_sisa) * Number(i.harga_satuan)
+                 total_harga: Number(i.jumlah_sisa) === 0 ? Number(i.jumlah_diterima) * Number(i
+                     .harga_satuan) : Number(i.jumlah_sisa) * Number(i.harga_satuan)
              }));
 
              renderTable();
@@ -157,13 +164,18 @@
                     <td class="px-3 py-2">${index + 1}</td>
                     <td class="px-3 py-2">${item.material_nama}</td>
                     <td class="px-3 py-2">${item.jumlah_diminta}</td>
-                    <td class="px-3 py-2">
-                        <input type="number"
-                               class="jumlah-diterima w-24 border rounded p-1"
-                               data-id="${item.id}"
-                               min="0"
-                               value="${item.jumlah_diterima}">
-                    </td>
+                     <td class="px-3 py-2">
+                ${item.jumlah_sisa === 0 
+                    ? `<span class="jumlah-diterima w-24 border rounded p-1 bg-gray-100 text-center inline-block"
+                                            data-id="${item.id}"
+                                            data-value="0">✔️</span>`
+                    : ` <input type="number"
+                                                                           class="jumlah-diterima w-24 border rounded p-1"
+                                                                           data-id="${item.id}"
+                                                                           min="0"
+                                                                           value="${item.jumlah_diterima}">`
+                }
+            </td>
                @if ($poSelesai)
                 <td class="px-3 py-2">
                     <span class="bg-green-500/10 text-green-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded">
@@ -172,7 +184,7 @@
                 </td>
             @elseif ($poSudahDiterima)
                 <td class="px-3 py-2">
-                    <input type="number"
+                    <input type="number" disable
                         class="jumlah-diterima w-24 border rounded p-1"
                         data-id="${item.id}"
                         min="0"
@@ -190,6 +202,7 @@
                     <td class="px-3 py-2 total-cell" data-id="${item.id}">
                         ${numberFormat.format(item.total_harga)}
                     </td>
+                     @if (!$poSelesai)
                     <td class="px-3 py-2 text-center">
                         <button type="button"
                                 class="btn-delete bg-red-500 text-white py-1 px-3 rounded text-sm"
@@ -197,6 +210,7 @@
                             Hapus
                         </button>
                     </td>
+                    @endif
                 </tr>
             `;
                      tbody.append(row);
@@ -248,27 +262,39 @@
 
                  let invalid = false;
 
-                 for (const item of itemPO) {
+                 document.querySelectorAll('.jumlah-diterima').forEach(el => {
+                     let diterima = el.tagName === 'SPAN' ?
+                         parseInt(el.dataset.value) :
+                         parseInt(el.value);
+
+                     let id = el.dataset.id;
+                     let item = itemPO.find(i => i.id === id);
+
+                     // skip kalau sisa = 0
+                     if (item.jumlah_sisa === 0) return;
+
                      if (
-                         item.jumlah_diterima > item.jumlah_diminta ||
-                         (item.jumlah_sisa != null && item.jumlah_diterima > item.jumlah_sisa)
+                         diterima > item.jumlah_diminta ||
+                         (item.jumlah_sisa !== null && diterima > item.jumlah_sisa) ||
+                         diterima < 0
                      ) {
                          Swal.fire({
                              icon: 'warning',
                              title: 'Perhatian',
-                             text: 'Jumlah diterima terlalu banyak',
+                             text: `Jumlah diterima terlalu banyak untuk material ${item.material_nama}`,
                              timer: 3000,
                          });
                          invalid = true;
-                         break; // keluar loop
                      }
-                 }
+                 });
 
                  if (invalid) {
-                     return; // stop submit, jangan lanjut ke AJAX
+                     return; // stop submit
                  }
 
                  var poId = $('td.px-4.py-2.font-medium').data('po-id');
+
+                 console.log(itemPO);
 
                  $.ajax({
                      method: "POST",

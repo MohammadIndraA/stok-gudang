@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StokTransaction extends Model
 {
-        use HasUuids;
+    use HasUuids;
 
     protected $keyType = 'string';
     public $incrementing = false;
@@ -23,4 +23,8 @@ class StokTransaction extends Model
         return $this->belongsTo(Project::class);
     }
 
+    public function vendor()
+    {
+        return $this->hasMany(Vendor::class, 'vendor_id');
+    }
 }

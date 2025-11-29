@@ -31,18 +31,21 @@ class Material extends Model
 
     public static function generateKode(): string
     {
-        // Ambil kode terakhir berdasarkan angka, bukan string
         $lastKode = self::select('kode_material')
             ->orderByRaw("CAST(SUBSTRING(kode_material, 4) AS UNSIGNED) DESC")
             ->value('kode_material');
 
-        if ($lastKode) {
-            $number = (int) substr($lastKode, 3);
-            $newNumber = $number + 1;
-        } else {
-            $newNumber = 1;
-        }
+        $number = $lastKode ? (int) substr($lastKode, 3) : 0;
+        $newNumber = $number + 1;
 
         return 'MTL' . str_pad($newNumber, 5, '0', STR_PAD_LEFT);
+    }
+
+    public function stokTersedia()
+    {
+        return $this->hasMany(StokTransaction::class)
+            ->orderBy('created_at', 'desc')
+            ->first()
+            ?->stok_setelah_transaksi ?? 0;
     }
 }

@@ -26,36 +26,7 @@
                              <x-input-v2 name="nama_proyek" label="Nama Perumahan" :value="old('nama_proyek', $vendor->nama_proyek ?? '')"
                                  placeholder="Masukan Nama Perumahan" required="true" type="text" />
                              {{-- Tanggal Mulai --}}
-                             <x-input-v2 name="tanggal_mulai" label="Tanggal Mulai" :value="old('tanggal_mulai', $aplikator->tanggal_mulai ?? '')"
-                                 placeholder="Tanggal Mulai" required="true" type="text" />
-                             {{-- Tanggal Selesai --}}
-                             <x-input-v2 name="tanggal_selesai" label="Tanggal Selesai" :value="old('tanggal_selesai', $aplikator->tanggal_selesai ?? '')"
-                                 placeholder="Tanggal Selesai" required="true" type="text" />
-                             <!-- Status Radio -->
-                             <div class="mb-3">
-                                 <label class="font-semibold text-neutral-600 text-sm">Status</label>
-                                 <div class="flex gap-4 mt-1">
-                                     @php $status = old('status', $aplikator->status ?? 'aktif'); @endphp
-                                     <label class="flex items-center gap-2">
-                                         <input type="radio" name="status" value="aktif"
-                                             {{ $status === 'aktif' ? 'checked' : '' }}>
-                                         <span>aktif</span>
-                                     </label>
-                                     <label class="flex items-center gap-2">
-                                         <input type="radio" name="status" value="selesai"
-                                             {{ $status === 'selesai' ? 'checked' : '' }}>
-                                         <span>selesai</span>
-                                     </label>
-                                     <label class="flex items-center gap-2">
-                                         <input type="radio" name="status" value="dibatalkan"
-                                             {{ $status === 'dibatalkan' ? 'checked' : '' }}>
-                                         <span>dibatalkan</span>
-                                     </label>
-                                 </div>
-                             </div>
-                             {{-- alamat --}}
-                             <x-textarea name="lokasi" label="Lokasi Lengkap" :value="$vendor->lokasi ?? ''" :rows="4"
-                                 :required="true" />
+
 
                              <x-button-modal />
                          </form>

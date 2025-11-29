@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('material_requests', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nomor_permintaan')->unique();
-            $table->uuid('kapling_id');
-            $table->foreign('kapling_id')->references('id')->on('kaplings')->onDelete('restrict');
+            $table->uuid('kapling_id')->nullable();
+            $table->foreign('kapling_id')
+                ->references('id')
+                ->on('kaplings')
+                ->onDelete('restrict');
+            $table->uuid('aplikator_id');
+            $table->foreign('aplikator_id')->references('id')->on('aplikators')->onDelete('restrict');
             $table->uuid('diajukan_oleh');
             $table->enum('status', ['draft', 'diajukan', 'disetujui', 'ditolak', 'dipenuhi'])->default('draft');
             $table->date('tanggal_permintaan');

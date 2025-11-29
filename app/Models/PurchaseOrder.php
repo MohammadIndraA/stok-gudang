@@ -34,9 +34,8 @@ class PurchaseOrder extends Model
         // Format: PO + yymmdd + nomor urut 5 digit
         $prefix = 'PO' . date('ymd');
 
-        $lastKode = self::where('nomor_po', 'like', $prefix . '%')
-            ->orderBy('nomor_po', 'desc')
-            ->value('nomor_po');
+        // Ambil kode terakhir dari semua record, bukan hanya hari ini
+        $lastKode = self::orderBy('nomor_po', 'desc')->value('nomor_po');
 
         if ($lastKode) {
             // Ambil 5 digit terakhir sebagai nomor urut
@@ -48,6 +47,7 @@ class PurchaseOrder extends Model
 
         return $prefix . str_pad($newNumber, 5, '0', STR_PAD_LEFT);
     }
+
 
     public function vendor()
     {

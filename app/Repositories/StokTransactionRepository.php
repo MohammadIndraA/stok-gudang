@@ -7,6 +7,7 @@ use App\Models\Kapling;
 use App\Models\Material;
 use App\Models\PurchaseOrder;
 use App\Models\StokTransaction;
+use App\Models\Vendor;
 
 class StokTransactionRepository
 {
@@ -14,12 +15,15 @@ class StokTransactionRepository
     {
         return StokTransaction::query();
     }
+    public function getVendor()
+    {
+        return Vendor::pluck('nama', 'id',)->toArray();
+    }
     public function masuk()
     {
         return StokTransaction::with('material')
-        ->where('jenis_transaksi', 'masuk')
-        ->get();
-
+            ->where('jenis_transaksi', 'masuk')
+            ->get();
     }
     public function keluar()
     {
@@ -47,5 +51,3 @@ class StokTransactionRepository
         return $grn->delete();
     }
 }
-
-?>

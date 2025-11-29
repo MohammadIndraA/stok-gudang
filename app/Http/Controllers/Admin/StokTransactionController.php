@@ -22,7 +22,7 @@ class StokTransactionController extends Controller
 
         // $this->authorize('viewAny', User::class);
         if ($request->ajax()) {
-            $grns = $this->service->getMasuk();
+            $grns = $this->service->masuk($request->all());
             return DataTables::of($grns)
                 ->addIndexColumn()
                 ->editColumn('material_id', function ($row) {
@@ -49,22 +49,28 @@ class StokTransactionController extends Controller
                 ->rawColumns(['referensi_jenis', 'material_id', 'catatan', 'waktu', 'satuan'])
                 ->make(true);
         }
-        return view('admin.stok.index');
+        $vendors = $this->service->getVendor();
+        return view('admin.stok.index', compact('vendors'));
     }
 
 
     public function stokKeluar(Request $request)
     {
-        // $this->authorize('viewAny', User::class);
         if ($request->ajax()) {
-            $grns = $this->service->getKeluar();
+            $grns = $this->service->keluar($request->all());
             return DataTables::of($grns)
                 ->addIndexColumn()
                 ->editColumn('material_id', function ($row) {
                     return $row->material->nama_material;
                 })
+                ->editColumn('satuan', function ($row) {
+                    return $row->material->satuan;
+                })
                 ->editColumn('catatan', function ($row) {
                     return $row->catatan ?? '-';
+                })
+                ->editColumn('waktu', function ($row) {
+                    return $row->created_at->locale('id')->translatedFormat('l, d F Y H:i') ?? '-';
                 })
                 ->addColumn('referensi_jenis', function ($row) {
                     if ($row->referensi_jenis === 'grn') {
@@ -75,9 +81,10 @@ class StokTransactionController extends Controller
                         return '<span class="bg-green-500/10 text-green-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded-full">disetujui</span>';
                     }
                 })
-                ->rawColumns(['referensi_jenis', 'material_id', 'catatan'])
+                ->rawColumns(['referensi_jenis', 'material_id', 'catatan', 'waktu', 'satuan'])
                 ->make(true);
         }
+        $vendors = $this->service->getVendor();
         return view('admin.stok.index');
     }
 }

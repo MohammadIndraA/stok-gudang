@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\ResponseJson;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MaterialRequest;
+use App\Models\StokTransaction;
 use App\Services\MaterialService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
@@ -13,20 +14,20 @@ use Illuminate\Support\Facades\Log;
 
 class MaterialController extends Controller
 {
-      protected $service;
+    protected $service;
 
     public function __construct(MaterialService $service)
     {
         $this->service = $service;
     }
 
-     public static function middleware()
+    public static function middleware()
     {
         return [
-             new Middleware('permission:view-aplikator', ['only' => ['index','show']]),
-             new Middleware('permission:create-aplikator', ['only' => ['create','store']]),
-             new Middleware('permission:edit-aplikator', ['only' => ['edit','update']]),
-             new Middleware('permission:delete-aplikator', ['only' => ['destroy']]),
+            new Middleware('permission:view-aplikator', ['only' => ['index', 'show']]),
+            new Middleware('permission:create-aplikator', ['only' => ['create', 'store']]),
+            new Middleware('permission:edit-aplikator', ['only' => ['edit', 'update']]),
+            new Middleware('permission:delete-aplikator', ['only' => ['destroy']]),
         ];
     }
 
@@ -34,20 +35,20 @@ class MaterialController extends Controller
     {
         // $this->authorize('viewAny', User::class);
         if ($request->ajax()) {
-        $materials = $this->service->getAll();
-        return DataTables::of($materials)
-            ->addIndexColumn()
-            ->addColumn('action', function ($row) {
-                return view('components.button-action', [
-                    'id' => $row->id,
-                    'routeEdit' => 'admin.material.edit',
-                    'routeDelete' => 'admin.material.destroy',
-                    'dataTable' => 'materialTable',
-                    'model' => $row
-                ])->render();
-            })
-           ->rawColumns(['action'])
-            ->make(true);
+            $materials = $this->service->getAll();
+            return DataTables::of($materials)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    return view('components.button-action', [
+                        'id' => $row->id,
+                        'routeEdit' => 'admin.material.edit',
+                        'routeDelete' => 'admin.material.destroy',
+                        'dataTable' => 'materialTable',
+                        'model' => $row
+                    ])->render();
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
         return view('admin.material.index');
     }
@@ -62,12 +63,11 @@ class MaterialController extends Controller
             // $this->authorize('create', User::class);
             $data = $request->validated();
             $this->service->create($data);
-             return redirect()->route('admin.material.index');
+            return redirect()->route('admin.material.index');
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return ResponseJson::error($th->getMessage(), 500);
         }
-       
     }
 
     public function show(Request $request)
@@ -77,7 +77,7 @@ class MaterialController extends Controller
         $material = $this->service->find($id);
         if (!$material) {
             return ResponseJson::error('Material tidak ditemukan', 404);
-         }
+        }
         return ResponseJson::success($material, 'Material found successfully');
     }
 
@@ -86,11 +86,11 @@ class MaterialController extends Controller
         $material = $this->service->find($id);
         if (!$material) {
             return ResponseJson::error('Material tidak ditemukan', 404);
-         }
+        }
         return view('admin.material.form', compact('material'));
     }
 
-   public function update(MaterialRequest $request, string $id)
+    public function update(MaterialRequest $request, string $id)
     {
         try {
             $data = $request->validated();
@@ -103,7 +103,7 @@ class MaterialController extends Controller
             $this->service->update($id, $data);
 
             return redirect()->route('admin.material.index')
-                             ->with('success', 'Data berhasil diperbarui');
+                ->with('success', 'Data berhasil diperbarui');
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return ResponseJson::error($th->getMessage(), 500);
@@ -113,7 +113,7 @@ class MaterialController extends Controller
     public function destroy($id)
     {
         try {
-             $deleted = $this->service->delete($id);
+            $deleted = $this->service->delete($id);
             if (!$deleted) {
                 return ResponseJson::error('Material tidak ditemukan atau gagal dihapus', 404);
             }
@@ -122,5 +122,14 @@ class MaterialController extends Controller
             Log::error($th->getMessage());
             return ResponseJson::error($th->getMessage(), 500);
         }
+    }
+
+    public function getStok($id)
+    {
+        $stok = StokTransaction::where('material_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->value('stok_setelah_transaksi') ?? 0;
+
+        return response()->json(['stok' => $stok]);
     }
 }
