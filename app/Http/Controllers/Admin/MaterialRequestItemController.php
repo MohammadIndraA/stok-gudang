@@ -20,7 +20,7 @@ class MaterialRequestItemController extends Controller
 
         try {
 
-            $mr =  MaterialRequest::where('id', $request->id)->update([
+            MaterialRequest::where('id', $request->id)->update([
                 'status' => 'disetujui',
                 'catatan' => $request->catatan ?? null,
             ]);

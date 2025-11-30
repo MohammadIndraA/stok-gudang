@@ -5,6 +5,19 @@
         <div class="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-12 xl:col-span-12">
             <div class="w-full relative mb-4">
                 <div class="flex-auto p-0 md:p-4">
+                    <div class="flex p-3 mb-4 bg-green-100 rounded-lg dark:bg-green-200 p-6" role="alert">
+                        <i class="fas fa-triangle-exclamation flex-shrink-0 text-green-700 self-center"></i>
+                        <div class="ml-3 text-sm font-medium text-green-700 dark:text-green-800">
+                            Klik Detail Untuk menyetujui
+                            Mengeluarkan Material
+                            Sesuai dengan kebutuhan ataupun permintaan.
+                        </div>
+                        <button type="button"
+                            class="justify-center items-center ml-auto -mx-1.5 -my-1.5 bg-green-100 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex h-8 w-8 dark:bg-green-200 dark:text-green-600 dark:hover:bg-green-300 alert-hidden">
+
+                            <i class="icofont-close"></i>
+                        </button>
+                    </div>
                     {{-- @can('create-Aplikator') --}}
                     <div class="flex flex-wrap gap-4 mb-3">
                         <div>

@@ -96,7 +96,7 @@
                                  <form action="" id="form-penerimaan-material">
                                      <button type="submit"
                                          class="inline-block focus:outline-none bg-brand-500 mt-1 text-white hover:bg-brand-600 hover:text-white  text-md font-medium py-2 px-4 rounded">
-                                         Simpan Purchase Order
+                                         Simpan Permintan Material
                                      </button>
                                  </form>
                              </th>
