@@ -11,7 +11,7 @@
             <form class="grid grid-cols-12 gap-6 p-6 m-4" id="form-material-item">
                 <div class="col-span-12 md:col-span-6">
                     {{-- vendor --}}
-                    <x-select-search name="vendor_id" label="Vendor" :options="$vendors" :value="old('vendor_id')"
+                    <x-select-search name="vendor_id" label="Vendor" :options="$vendors" :selected="$purchaseOrder->vendor_id ?? null"
                         placeholder="Pilih vendor..." />
                 </div>
                 {{-- status --}}
@@ -33,8 +33,8 @@
 
                 {{-- material --}}
                 <div class="col-span-12 md:col-span-5 me-4">
-                    <x-select-search name="material_id" label="Material" :value="old('material_id')" placeholder="Pilih material..."
-                        :options="$materials" />
+                    <x-select-search name="material_id" label="Material" :options="$materials" :selected="$purchaseOrder->material_id ?? null"
+                        placeholder="Pilih material..." />
                 </div>
                 {{-- Jumlah Diminta --}}
                 <div class="col-span-12 md:col-span-2 me-4">
