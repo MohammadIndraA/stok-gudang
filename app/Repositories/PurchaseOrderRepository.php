@@ -20,7 +20,9 @@ class PurchaseOrderRepository
     }
     public function getVendor()
     {
-        return Vendor::pluck('nama', 'id')->toArray();
+        return Vendor::pluck('nama', 'id')
+            ->map(fn($v) => $v ?: '-')   // bila NULL ganti tanda "-"
+            ->toArray();
     }
 
     public function find($id)

@@ -11,7 +11,7 @@ class SelectSearch extends Component
     public string $name;
     public string $label;
     public array $options;
-    public array $selected;   // <-- selalu dipaksa array
+    public string|array|null $selected;
     public ?string $placeholder;
 
     public function __construct(
@@ -24,16 +24,15 @@ class SelectSearch extends Component
         $this->name = $name;
         $this->label = $label;
 
-        // Jika array numerik, jadikan key=value
-        if (is_array($options) && function_exists('array_is_list') && array_is_list($options)) {
+        // Jika array numerik, jadikan nilai = label, tapi jangan memproses associative array
+        if (is_array($options) && array_is_list($options)) {
             $this->options = array_combine($options, $options);
         } else {
             $this->options = (array) $options;
         }
 
-        // Selalu jadikan array agar aman
-        $this->selected = is_array($selected) ? $selected : (array) $selected;
-
+        // Jika selected adalah string tunggal, ubah menjadi array untuk mempermudah pengecekan nilai terpilih
+        $this->selected = is_array($selected) ? $selected : ($selected !== null ? [$selected] : []);
         $this->placeholder = $placeholder;
     }
 
