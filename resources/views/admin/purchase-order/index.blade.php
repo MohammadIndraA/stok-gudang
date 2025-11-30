@@ -11,7 +11,7 @@
             <form class="grid grid-cols-12 gap-6 p-6 m-4" id="form-material-item">
                 <div class="col-span-12 md:col-span-6">
                     {{-- vendor --}}
-                    <x-select-search name="vendor_id" label="Vendor" :options="$vendors" :value="old('vendor_id', $vendors->vendor_id ?? '')" selected=""
+                    <x-select-search name="vendor_id" label="Vendor" :options="$vendors" :value="old('vendor_id')"
                         placeholder="Pilih vendor..." />
                 </div>
                 {{-- status --}}
@@ -24,7 +24,7 @@
                     ];
                 @endphp
                 <div class="col-span-12 md:col-span-6 ms-3">
-                    <x-select name="status" label="Status" :options="$status" :value="isset($status) ? $program_yayasans->status : null" :required="false" />
+                    <x-select name="status" label="Status" :options="$status" :value="old('status')" :required="false" />
                 </div>
                 {{-- catatan --}}
                 <div class="col-span-12 md:col-span-12">
@@ -33,7 +33,7 @@
 
                 {{-- material --}}
                 <div class="col-span-12 md:col-span-5 me-4">
-                    <x-select-search name="material_id" label="Material" :value="old('material_id', $materials->material_id ?? '')" placeholder="Pilih material..."
+                    <x-select-search name="material_id" label="Material" :value="old('material_id')" placeholder="Pilih material..."
                         :options="$materials" />
                 </div>
                 {{-- Jumlah Diminta --}}
