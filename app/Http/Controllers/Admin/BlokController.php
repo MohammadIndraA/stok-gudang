@@ -55,14 +55,14 @@ class BlokController extends Controller
                 ->rawColumns(['action', 'kapling', 'project_id'])
                 ->make(true);
         }
-        return view('admin.blok.index');
+        return view('admin.Blok.index');
     }
 
     public function create()
     {
         $projects = $this->service->getProject();
 
-        return view('admin.blok.form', compact('projects'));
+        return view('admin.Blok.form', compact('projects'));
     }
     public function store(BlokRequest $request)
     {
@@ -95,7 +95,7 @@ class BlokController extends Controller
             return ResponseJson::error('Blok tidak ditemukan', 404);
         }
         $projects = $this->service->getProject();
-        return view('admin.blok.form', compact('blok', 'projects'));
+        return view('admin.Blok.form', compact('blok', 'projects'));
     }
 
     public function update(BlokRequest $request, string $id)

@@ -52,14 +52,14 @@ class KaplingController extends Controller
                 ->rawColumns(['action', 'blok_id'])
                 ->make(true);
         }
-        return view('admin.kapling.index');
+        return view('admin.Kapling.index');
     }
 
     public function create()
     {
         $bloks = $this->service->getBlok();
 
-        return view('admin.kapling.form', compact('bloks'));
+        return view('admin.Kapling.form', compact('bloks'));
     }
     public function store(KaplingRequest $request)
     {
@@ -92,7 +92,7 @@ class KaplingController extends Controller
             return ResponseJson::error('Kapling tidak ditemukan', 404);
         }
         $bloks = $this->service->getBlok();
-        return view('admin.kapling.form', compact('kaplings', 'bloks'));
+        return view('admin.Kapling.form', compact('kaplings', 'bloks'));
     }
 
     public function update(KaplingRequest $request, string $id)
