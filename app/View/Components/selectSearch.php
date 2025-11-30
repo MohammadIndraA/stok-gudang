@@ -6,33 +6,35 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class selectSearch extends Component
+class SelectSearch extends Component
 {
-     public string $name;
+    public string $name;
     public string $label;
     public array $options;
-    public ?string $selected;
+    public string|array|null $selected;   // bisa string atau array
     public ?string $placeholder;
-    /**
-     * Create a new component instance.
-     */
-    public function __construct(  string $name = 'vendor',
+
+    public function __construct(
+        string $name = 'vendor',
         string $label = 'Vendor',
         array $options = ['draft', 'diajukan', 'disetujui', 'dibatalkan'],
-        ?string $selected = null,
-        ?string $placeholder = null)
-    {
+        string|array|null $selected = null,
+        ?string $placeholder = null
+    ) {
         $this->name = $name;
         $this->label = $label;
-        // Jika array numerik (tanpa key eksplisit), buat value = label
-        $this->options = array_is_list($options) ? array_combine($options, $options) : $options;
+
+        // Jika array numerik (tanpa key), buat value = label
+        if (is_array($options) && function_exists('array_is_list') && array_is_list($options)) {
+            $this->options = array_combine($options, $options);
+        } else {
+            $this->options = (array) $options;
+        }
+
         $this->selected = $selected;
         $this->placeholder = $placeholder;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.select-search');
