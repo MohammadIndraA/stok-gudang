@@ -16,7 +16,7 @@ class PurchaseOrderRepository
     }
     public function getMaterial()
     {
-        return Material::pluck('nama_material','id',)->toArray();
+        return Material::pluck('nama_material', 'id')->toArray();
     }
     public function getVendor()
     {
@@ -44,5 +44,3 @@ class PurchaseOrderRepository
         return $po->delete();
     }
 }
-
-?>

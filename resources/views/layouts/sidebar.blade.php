@@ -7,7 +7,7 @@
      </li>
      <li>
          {{-- Dahsboard --}}
-         <a href="/dashboard"
+         <a href="{{ route('admin.home') }}"
              class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-black"
              data-fc-parent="parent-accordion">
              <span data-lucide="gauge"
