@@ -42,8 +42,8 @@
 
                  {{-- material --}}
                  <div class="col-span-12 md:col-span-5 me-4">
-                     <x-select-search name="material_id" label="Material" :value="old('material_id', $vendor->material_id ?? '')" placeholder="Pilih material..."
-                         :options="$materials" />
+                     <x-select-search name="material_id" label="Material" :options="$materials" :selected="$purchaseOrder->material_id ?? null"
+                         placeholder="Pilih material..." />
                  </div>
 
                  {{-- Jumlah Diminta --}}
