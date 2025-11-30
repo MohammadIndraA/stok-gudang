@@ -2,13 +2,23 @@
 
 namespace App\Repositories;
 
+use App\Models\Blok;
 use App\Models\Kapling;
 
 class KaplingRepository
 {
     public function all()
     {
-        return Kapling::with('blok')->get();
+        return Kapling::with('blok')->orderByRaw("LEFT(nama, 1) ASC")
+            ->orderByRaw("CAST(SUBSTRING(nama, 2) AS UNSIGNED) ASC")->get();
+    }
+
+    public function getBlok()
+    {
+        return Blok::orderByRaw("LEFT(nama, 1) ASC")
+            ->orderByRaw("CAST(SUBSTRING(nama, 2) AS UNSIGNED) ASC")
+            ->pluck('nama', 'id')
+            ->toArray();
     }
 
     public function find($id)
@@ -32,5 +42,3 @@ class KaplingRepository
         return $kapling->delete();
     }
 }
-
-?>

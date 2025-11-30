@@ -11,7 +11,7 @@ class BlokRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,19 @@ class BlokRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama' => 'unique:bloks,nama|required',
+            'project_id' => ['required', 'exists:projects,id'],
+
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nama.required'      => 'Nama wajib diisi.',
+            'nama.unique'        => 'Nama sudah digunakan.',
+            'project_id.required' => 'Perumahan harus dipilih',
+
         ];
     }
 }

@@ -12,8 +12,15 @@ class Blok extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
+    protected $guarded = [];
+
     public function kaplings()
     {
         return $this->hasMany(Kapling::class);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
     }
 }

@@ -20,7 +20,7 @@
                                 grid-cols-1 p-0 md:p-4 p-4 bg-white rounded-lg dark:bg-gray-900">
                         <div class="sm:-mx-6 lg:-mx-8">
                             <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
-                                <table class="w-full" id="blokTable">
+                                <table class="w-full" id="kaplingTable">
                                     <thead class="bg-white dark:bg-slate-700/20">
                                         <tr>
                                             <th scope="col"
@@ -57,7 +57,7 @@
     <script type="text/javascript">
         $(function() {
 
-            var table = $('#blokTable').DataTable({
+            var table = $('#kaplingTable').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('admin.kapling.index') }}",

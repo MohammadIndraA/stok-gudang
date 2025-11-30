@@ -3,13 +3,15 @@
 // app/Services/PostService.php
 namespace App\Services;
 
-use App\Repositories\KaplingRepository;
+use App\Repositories\MaterialRancanganRepository;
+use App\Repositories\MaterialRepository;
+use App\Repositories\VendorRepository;
 
-class KaplingService
+class MaterialRancanganService
 {
-    protected KaplingRepository $repository;
+    protected MaterialRancanganRepository $repository;
 
-    public function __construct(KaplingRepository $repository)
+    public function __construct(MaterialRancanganRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -17,11 +19,6 @@ class KaplingService
     public function getAll()
     {
         return $this->repository->all();
-    }
-
-    public function getBlok()
-    {
-        return $this->repository->getBlok();
     }
 
     public function find(string $id)

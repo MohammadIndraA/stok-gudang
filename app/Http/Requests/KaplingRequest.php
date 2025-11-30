@@ -11,7 +11,7 @@ class KaplingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,18 @@ class KaplingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama' => 'unique:kaplings,nama|required',
+            'blok_id' => ['required', 'exists:bloks,id'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nama.required'      => 'Nama wajib diisi.',
+            'nama.unique'        => 'Nama sudah digunakan.',
+            'blok_id.required' => 'Perumahan harus dipilih',
+
         ];
     }
 }

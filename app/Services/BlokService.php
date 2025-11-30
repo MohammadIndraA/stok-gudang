@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // app/Services/PostService.php
 namespace App\Services;
@@ -17,6 +17,11 @@ class BlokService
     public function getAll()
     {
         return $this->repository->all();
+    }
+
+    public function getProject()
+    {
+        return $this->repository->getProject();
     }
 
     public function find(string $id)
@@ -43,5 +48,3 @@ class BlokService
         return $this->repository->delete($category);
     }
 }
-
-?>

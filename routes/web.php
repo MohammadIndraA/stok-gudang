@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\BlokController;
 use App\Http\Controllers\Admin\GoodsReceiptItemController;
 use App\Http\Controllers\Admin\GoodsReceiptNoteController;
 use App\Http\Controllers\Admin\KaplingController;
+use App\Http\Controllers\Admin\MaterialRancanganController;
 use App\Http\Controllers\Admin\MaterialRequestController;
 use App\Http\Controllers\Admin\MaterialRequestItemController;
 use App\Http\Controllers\Admin\PurchaseOrderItemController;
@@ -18,6 +19,10 @@ use App\Http\Controllers\Admin\StokTransactionController;
 use App\Models\MaterialRequest;
 use App\Models\StokTransaction;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth')->group(function () {
@@ -42,6 +47,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Route Material
         Route::resource('material', MaterialController::class);
+
+        // Route Material
+        Route::resource('material-rancangan', MaterialRancanganController::class);
 
         // Route Blok
         Route::resource('blok', BlokController::class);

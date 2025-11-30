@@ -3,7 +3,7 @@
     <div
         class="w-full m-auto bg-white dark:bg-slate-800/60 rounded shadow-lg ring-2 ring-slate-300/50 dark:ring-slate-700/50 lg:max-w-md">
         <div class="text-center p-6 bg-slate-900 rounded-t">
-            <a href="/"><img src="{{ asset('design-system/assets/images/logo-polda-1.png') }}" alt=""
+            <a href="/"><img src="{{ asset('design-system/assets/images/logo-sic.png') }}" alt=""
                     class="w-14 h-14 mx-auto mb-2"></a>
             <h3 class="font-semibold text-white text-xl mb-1">Let's Get Started </h3>
             <p class="text-xs text-slate-400">Sign in to continue to Website.</p>

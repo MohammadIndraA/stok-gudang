@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Blok;
 use App\Models\Kapling;
+use App\Models\Project;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -13,13 +14,15 @@ class BlokSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-   public function run(): void
+    public function run(): void
     {
+        $project_id = Project::first();
         // Buat beberapa blok
         $blokA = Blok::create([
             'id' => (string) Str::uuid(),
             'nama' => 'Blok A',
             'deskripsi' => 'Blok A untuk perumahan premium',
+            'project_id' => $project_id->id,
             'slug' => 'blok-a',
         ]);
 
@@ -27,6 +30,7 @@ class BlokSeeder extends Seeder
             'id' => (string) Str::uuid(),
             'nama' => 'Blok B',
             'deskripsi' => 'Blok B untuk perumahan reguler',
+            'project_id' => $project_id->id,
             'slug' => 'blok-b',
         ]);
 
@@ -34,6 +38,7 @@ class BlokSeeder extends Seeder
             'id' => (string) Str::uuid(),
             'nama' => 'Blok C',
             'deskripsi' => 'Blok C dekat taman',
+            'project_id' => $project_id->id,
             'slug' => 'blok-c',
         ]);
 

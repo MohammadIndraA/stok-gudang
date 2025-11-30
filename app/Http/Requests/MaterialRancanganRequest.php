@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MaterialRequest extends FormRequest
+class MaterialRancanganRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class MaterialRequest extends FormRequest
     {
         return [
             // kode_material otomatis generate → tidak perlu divalidasi saat create
-            'nama_material' => ['required', 'string', 'max:255', 'unique:materials,nama_material'],
+            'nama_material' => ['required', 'string', 'max:255', 'unique:material_rancangans,nama_material'],
             'satuan'        => ['required', 'string', 'max:50'],
             'kategori'      => ['nullable', 'string', 'max:100'],
             'stok_minimum'  => ['required', 'integer', 'min:0'],

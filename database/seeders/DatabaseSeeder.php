@@ -2,11 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+
+use function Symfony\Component\Clock\now;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +21,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+
+        Project::create([
+            'nama_proyek' => 'SAKURA INDAH CIPATUJAH',
+            'lokasi' => 'Jl. Raya Cipatujah Sindangkerta, Kp. Cikidang Cipatujah Kabupaten Tasikmalaya Jawa Barat',
+            'tanggal_mulai' => now(),
+            'tanggal_selesai' => now(),
+            'status' => 'aktif',
+        ]);
 
         $this->call([
             PermissionSeeder::class,

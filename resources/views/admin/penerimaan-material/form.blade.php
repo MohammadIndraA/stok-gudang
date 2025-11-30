@@ -167,13 +167,13 @@
                      <td class="px-3 py-2">
                 ${item.jumlah_sisa === 0 
                     ? `<span class="jumlah-diterima w-24 border rounded p-1 bg-gray-100 text-center inline-block"
-                                            data-id="${item.id}"
-                                            data-value="0">✔️</span>`
+                                                 data-id="${item.id}"
+                                                 data-value="0">✔️</span>`
                     : ` <input type="number"
-                                                                           class="jumlah-diterima w-24 border rounded p-1"
-                                                                           data-id="${item.id}"
-                                                                           min="0"
-                                                                           value="${item.jumlah_diterima}">`
+                                                                                class="jumlah-diterima w-24 border rounded p-1"
+                                                                                data-id="${item.id}"
+                                                                                min="0"
+                                                                                value="${item.jumlah_diterima}">`
                 }
             </td>
                @if ($poSelesai)

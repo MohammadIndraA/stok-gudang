@@ -4,18 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\ResponseJson;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\BlokRequest;
-use App\Services\BlokService;
+use App\Http\Requests\MaterialRancanganRequest;
+use App\Services\MaterialRancanganService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Log;
 
-class BlokController extends Controller
+
+class MaterialRancanganController extends Controller
 {
     protected $service;
 
-    public function __construct(BlokService $service)
+    public function __construct(MaterialRancanganService $service)
     {
         $this->service = $service;
     }
@@ -23,10 +24,10 @@ class BlokController extends Controller
     public static function middleware()
     {
         return [
-            new Middleware('permission:view-aplikator', ['only' => ['index', 'show']]),
-            new Middleware('permission:create-aplikator', ['only' => ['create', 'store']]),
-            new Middleware('permission:edit-aplikator', ['only' => ['edit', 'update']]),
-            new Middleware('permission:delete-aplikator', ['only' => ['destroy']]),
+            new Middleware('permission:view-material-rancangan', ['only' => ['index', 'show']]),
+            new Middleware('permission:create-material-rancangan', ['only' => ['create', 'store']]),
+            new Middleware('permission:edit-material-rancangan', ['only' => ['edit', 'update']]),
+            new Middleware('permission:delete-material-rancangan', ['only' => ['destroy']]),
         ];
     }
 
@@ -34,43 +35,35 @@ class BlokController extends Controller
     {
         // $this->authorize('viewAny', User::class);
         if ($request->ajax()) {
-            $bloks = $this->service->getAll();
-            return DataTables::of($bloks)
+            $materials = $this->service->getAll();
+            return DataTables::of($materials)
                 ->addIndexColumn()
-                ->editColumn('kapling', function ($row) {
-                    return $row->kaplings->count();
-                })
-                ->editColumn('project_id', function ($row) {
-                    return $row->project->nama_proyek;
-                })
                 ->addColumn('action', function ($row) {
                     return view('components.button-action', [
                         'id' => $row->id,
-                        'routeEdit' => 'admin.blok.edit',
-                        'routeDelete' => 'admin.blok.destroy',
-                        'dataTable' => 'blokTable',
+                        'routeEdit' => 'admin.material-rancangan.edit',
+                        'routeDelete' => 'admin.material-rancangan.destroy',
+                        'dataTable' => 'bomTable',
                         'model' => $row
                     ])->render();
                 })
-                ->rawColumns(['action', 'kapling', 'project_id'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('admin.blok.index');
+        return view('admin.material-rancangan.index');
     }
 
     public function create()
     {
-        $projects = $this->service->getProject();
-
-        return view('admin.blok.form', compact('projects'));
+        return view('admin.material-rancangan.form');
     }
-    public function store(BlokRequest $request)
+    public function store(MaterialRancanganRequest $request)
     {
         try {
             // $this->authorize('create', User::class);
             $data = $request->validated();
             $this->service->create($data);
-            return redirect()->route('admin.blok.index');
+            return redirect()->route('admin.material-rancangan.index');
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return ResponseJson::error($th->getMessage(), 500);
@@ -81,36 +74,35 @@ class BlokController extends Controller
     {
         // $this->authorize('view', User::class);
         $id = $request->id;
-        $blok = $this->service->find($id);
-        if (!$blok) {
-            return ResponseJson::error('Blok tidak ditemukan', 404);
+        $material = $this->service->find($id);
+        if (!$material) {
+            return ResponseJson::error('Material tidak ditemukan', 404);
         }
-        return ResponseJson::success($blok, 'Blok found successfully');
+        return ResponseJson::success($material, 'Material found successfully');
     }
 
     public function edit($id)
     {
-        $blok = $this->service->find($id);
-        if (!$blok) {
-            return ResponseJson::error('Blok tidak ditemukan', 404);
+        $bom = $this->service->find($id);
+        if (!$bom) {
+            return ResponseJson::error('Material tidak ditemukan', 404);
         }
-        $projects = $this->service->getProject();
-        return view('admin.blok.form', compact('blok', 'projects'));
+        return view('admin.material-rancangan.form', compact('bom'));
     }
 
-    public function update(BlokRequest $request, string $id)
+    public function update(MaterialRancanganRequest $request, string $id)
     {
         try {
             $data = $request->validated();
-            $blok = $this->service->find($id);
+            $material = $this->service->find($id);
 
-            if (!$blok) {
-                return ResponseJson::error('Blok tidak ditemukan', 404);
+            if (!$material) {
+                return ResponseJson::error('Material tidak ditemukan', 404);
             }
 
             $this->service->update($id, $data);
 
-            return redirect()->route('admin.blok.index')
+            return redirect()->route('admin.material-rancangan.index')
                 ->with('success', 'Data berhasil diperbarui');
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
@@ -123,7 +115,7 @@ class BlokController extends Controller
         try {
             $deleted = $this->service->delete($id);
             if (!$deleted) {
-                return ResponseJson::error('Blok tidak ditemukan atau gagal dihapus', 404);
+                return ResponseJson::error('Material tidak ditemukan atau gagal dihapus', 404);
             }
             return ResponseJson::success($deleted, 'Material deleted successfully');
         } catch (\Throwable $th) {

@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bloks', function (Blueprint $table) {
+        Schema::create('material_rancangans', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('nama');
-            $table->text('deskripsi')->nullable();
-            $table->string('slug')->unique();
-            $table->uuid('project_id'); // foreign key ke bloks
-            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+            $table->string('kode_material')->unique();
+            $table->string('nama_material');
+            $table->string('satuan'); // contoh: sak, m³, buah
+            $table->string('kategori')->nullable();
+            $table->integer('stok_minimum')->default(0);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bloks');
+        Schema::dropIfExists('material_rancangans');
     }
 };
