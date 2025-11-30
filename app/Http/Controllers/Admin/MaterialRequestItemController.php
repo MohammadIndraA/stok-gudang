@@ -44,7 +44,6 @@ class MaterialRequestItemController extends Controller
 
             return response()->json([
                 'success'  => true,
-                'message'  => 'Permintaan Material berhasil disimpan!',
                 'redirect' => route('admin.permintaan-material.index')
             ]);
         } catch (\Throwable $th) {
