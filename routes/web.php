@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\BlokController;
+use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\Admin\GoodsReceiptItemController;
 use App\Http\Controllers\Admin\GoodsReceiptNoteController;
 use App\Http\Controllers\Admin\ItemStokOpnameController;
@@ -30,9 +31,7 @@ Route::get('/', function () {
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard.index');
-        })->name('home');
+        Route::get('/dashboard', [dashboardController::class, 'index'])->name('home');
 
         // Users
         Route::resource('user', UserController::class);
@@ -101,6 +100,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             // 
             Route::resource('periode', PeriodeStokOpnameController::class);
             Route::resource('input', ItemStokOpnameController::class);
+            Route::post('/update/material/stok-opname', [ItemStokOpnameController::class, 'update_material'])->name('update-material-stok-opname');
         });
     });
 });

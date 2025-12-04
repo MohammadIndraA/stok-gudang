@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\ResponseJson;
 use App\Http\Controllers\Controller;
 use App\Models\GoodsReceiptNote;
+use App\Models\Material;
 use App\Models\PurchaseOrder;
 use App\Models\StokTransaction;
 use App\Services\GoodsReceiptNoteService;
@@ -33,7 +34,7 @@ class GoodsReceiptNoteController extends Controller
             return DataTables::of($grns)
                 ->addIndexColumn()
                 ->editColumn('vendor_id', function ($row) {
-                    return '<a href="' . route('admin.penerimaan-material.edit', $row->id) . '" class="text-blue-50">' . $row->vendor->nama . '</a>';
+                    return '<a href="' . route('admin.penerimaan-material.edit', $row->id) . '" class="text-blue-500">' . $row->vendor->nama . '</a>';
                 })
                 ->editColumn('waktu', function ($row) {
                     return $row->created_at->locale('id')->translatedFormat('l, d F Y H:i') ?? '-';
@@ -119,6 +120,9 @@ class GoodsReceiptNoteController extends Controller
                     'catatan' => $request->catatan ?? null,
 
                 ]);
+
+                Material::where('id', $item['material_id'])
+                    ->increment('current_stock', $item['jumlah_diterima']);
             }
 
             DB::commit();
@@ -142,9 +146,9 @@ class GoodsReceiptNoteController extends Controller
 
     protected function hitungStokSetelah($materialId, $jumlahMasuk)
     {
-        $stokSebelum = StokTransaction::where('material_id', $materialId)
+        $stokSebelum = Material::where('id', $materialId)
             ->latest('id')
-            ->value('stok_setelah_transaksi') ?? 0;
+            ->value('current_stock') ?? 0;
 
         return $stokSebelum + $jumlahMasuk;
     }

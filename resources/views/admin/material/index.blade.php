@@ -45,6 +45,10 @@
                                                 Stok Minimum
                                             </th>
                                             <th scope="col"
+                                                class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
+                                                Stok Tersedia
+                                            </th>
+                                            <th scope="col"
                                                 class="p-3 text-center text-xs font-medium tracking-wider text-gray-700 dark:text-gray-400 uppercase"
                                                 style="width: 8%">
                                                 Action
@@ -90,6 +94,10 @@
                     {
                         data: 'stok_minimum',
                         name: 'stok_minimum'
+                    },
+                    {
+                        data: 'current_stock',
+                        name: 'current_stock'
                     },
                     {
                         data: 'action',

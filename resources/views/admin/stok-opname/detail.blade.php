@@ -45,9 +45,9 @@
                 <div class="flex-auto p-0 md:p-4">
                     <div class="flex flex-wrap gap-4 mb-3">
                         <div>
-                            <a href="{{ route('admin.project.create') }}"
+                            <a href="" id="btn-update-material"
                                 class="inline-block focus:outline-none bg-brand-500 mt-1 text-white hover:bg-brand-600 hover:text-white  text-md font-medium py-2 px-4 rounded">
-                                Update data stok
+                                Update data material
                             </a>
                         </div>
                     </div>
@@ -153,12 +153,36 @@
         });
     </script>
     <script>
-        function openModal(id) {
-            document.getElementById(id).classList.remove('hidden');
-        }
+        $(document).ready(function() {
 
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
-        }
+            $('#btn-update-material').on('click', function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('admin.stok-opname.update-material-stok-opname') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        periode_id: "{{ $dataPeriode->id }}",
+                    },
+                    success: function(res) {
+                        isSuccess = res.success;
+                        Swal.fire({
+                            icon: isSuccess ? 'success' : 'warning',
+                            title: isSuccess ? 'Berhasil' : 'Gagal',
+                            text: res.message,
+                            timer: 3000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            // redirect setelah alert selesai / ditutup
+                            window.location.href = response.redirect_url
+                        });
+                    },
+                })
+
+
+            });
+
+        });
     </script>
 @endsection

@@ -102,7 +102,6 @@ class MaterialRequestController extends Controller
                     'request_id'    => $mr->id,
                     'material_id'    => $item['material_id'],
                     'jumlah_diminta' => $item['jumlah_diminta'],
-                    'satuan' => $item['satuan'],
                 ]);
             }
 
@@ -111,7 +110,7 @@ class MaterialRequestController extends Controller
             return response()->json([
                 'success'  => true,
                 'message'  => 'Permintaan Material berhasil disimpan!',
-                'redirect' => route('admin.material-rakitan.index')
+                'redirect' => route('admin.permintaan-material.index')
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\ResponseJson;
 use App\Http\Controllers\Controller;
+use App\Models\Material;
 use App\Models\MaterialRequest;
 use App\Models\StokTransaction;
 use Illuminate\Http\Request;
@@ -38,6 +39,9 @@ class MaterialRequestItemController extends Controller
                     'catatan' => $request->catatan ?? null,
 
                 ]);
+
+                Material::where('id', $item['material_id'])
+                    ->decrement('current_stock', $item['jumlah_dikeluarkan']);
             }
 
             DB::commit();
@@ -55,9 +59,9 @@ class MaterialRequestItemController extends Controller
 
     protected function hitungStokSetelah($materialId, $jumlahMasuk)
     {
-        $stokSebelum = StokTransaction::where('material_id', $materialId)
+        $stokSebelum = Material::where('id', $materialId)
             ->latest('id')
-            ->value('stok_setelah_transaksi') ?? 0;
+            ->value('current_stock') ?? 0;
 
         return $stokSebelum - $jumlahMasuk;
     }

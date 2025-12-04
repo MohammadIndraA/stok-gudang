@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateInputStokOpnameRequest;
 use App\Models\ItemStokOpname;
+use App\Models\Material;
 use App\Models\PeriodeStokOpname;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class ItemStokOpnameController extends Controller
 
     public function __construct()
     {
-        $periode = PeriodeStokOpname::where('is_active', true)->first()->id;
+        $periode = PeriodeStokOpname::where('is_active', true)->first()->id ?? 0;
         $this->acctivePreiode = $periode;
         $this->items = ItemStokOpname::with(['material'])->where('periode_stok_opname_id', $this->acctivePreiode)->get();
     }
@@ -104,5 +105,45 @@ class ItemStokOpnameController extends Controller
         }
 
         return redirect()->route('admin.stok-opname.input.index');
+    }
+
+    public function update_material(Request $request)
+    {
+        $periodeId = $request->periode_id;
+        $periode = PeriodeStokOpname::findOrFail($periodeId);
+        $material = Material::all();
+
+        if (!$periode->is_active) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Periode Stok Opname Tidak Aktif',
+                'redirect_url' => route('admin.stok-opname.input.show', $periodeId),
+            ]);
+        }
+
+        if (count($periode->items) == count($material)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Sudah Terupdate Tidak Ada Data baru yang ditambahkan',
+                'redirect_url' => route('admin.stok-opname.input.show', $periodeId),
+            ]);
+        }
+
+        foreach ($material as $value) {
+            ItemStokOpname::updateOrCreate([
+                ['periode_stok_opname_id' => $periodeId, 'kode_material' => $value->kode_material],
+                ['jumlah_stok' => $value->current_stock]
+            ]);
+        }
+
+        $periode->is_completed = 0;
+        $periode->jumlah_barang = count($material);
+        $periode->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Material Berhasil di Update',
+            'redirect_url' => route('admin.stok-opname.input.show', $periodeId),
+        ]);
     }
 }
