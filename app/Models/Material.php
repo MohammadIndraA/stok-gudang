@@ -18,6 +18,10 @@ class Material extends Model
         'satuan',
         'kategori',
         'stok_minimum',
+        'is_rakitan',
+        'current_stock',
+        'berat_per_satuan',
+        'harga_satuan',
     ];
 
     protected static function boot()
@@ -47,5 +51,15 @@ class Material extends Model
             ->orderBy('created_at', 'desc')
             ->first()
             ?->stok_setelah_transaksi ?? 0;
+    }
+
+    public function rakitan()
+    {
+        return $this->hasOne(MaterialRakitan::class, 'material_id');
+    }
+
+    public function rakitanItems()
+    {
+        return $this->hasManyThrough(MaterialRakitanItem::class, MaterialRakitan::class, 'material_id', 'rakitan_id');
     }
 }

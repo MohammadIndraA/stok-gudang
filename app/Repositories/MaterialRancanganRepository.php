@@ -3,32 +3,41 @@
 namespace App\Repositories;
 
 use App\Models\Material;
-use App\Models\MaterialRancangan;
+use App\Models\MaterialRakitan;
 
 class MaterialRancanganRepository
 {
     public function all()
     {
-        return MaterialRancangan::orderBy('nama_material', 'asc')->get();
+        // return Material::with(['rakitanItems.material'])
+        //     ->where('is_rakitan', true)
+        //     ->orderBy('created_at', 'desc')
+        //     ->get();
+        return MaterialRakitan::with(['items.material'])->get();
     }
 
     public function find($id)
     {
-        return MaterialRancangan::findOrFail($id);
+        return MaterialRakitan::with(['items.material'])->findOrFail($id);
+    }
+
+    public function getMaterial()
+    {
+        return Material::pluck('nama_material', 'id',)->toArray();
     }
 
     public function create(array $data)
     {
-        return MaterialRancangan::create($data);
+        return MaterialRakitan::create($data);
     }
 
-    public function update(MaterialRancangan $material, array $data)
+    public function update(MaterialRakitan $material, array $data)
     {
         $material->update($data);
         return $material;
     }
 
-    public function delete(MaterialRancangan $material)
+    public function delete(MaterialRakitan $material)
     {
         return $material->delete();
     }

@@ -10,12 +10,16 @@ use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Admin\BlokController;
 use App\Http\Controllers\Admin\GoodsReceiptItemController;
 use App\Http\Controllers\Admin\GoodsReceiptNoteController;
+use App\Http\Controllers\Admin\ItemStokOpnameController;
 use App\Http\Controllers\Admin\KaplingController;
-use App\Http\Controllers\Admin\MaterialRancanganController;
+use App\Http\Controllers\Admin\MaterialRakitanController;
 use App\Http\Controllers\Admin\MaterialRequestController;
 use App\Http\Controllers\Admin\MaterialRequestItemController;
+use App\Http\Controllers\Admin\PeriodeStokOpnameController;
 use App\Http\Controllers\Admin\PurchaseOrderItemController;
 use App\Http\Controllers\Admin\StokTransactionController;
+use App\Http\Controllers\Admin\ProjectStagesController;
+use App\Http\Controllers\Admin\StageMaterialController;
 use App\Models\MaterialRequest;
 use App\Models\StokTransaction;
 use Illuminate\Support\Facades\Route;
@@ -49,7 +53,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('material', MaterialController::class);
 
         // Route Material
-        Route::resource('material-rancangan', MaterialRancanganController::class);
+        Route::resource('material-rakitan', MaterialRakitanController::class);
+        // // Route Material
+        // Route::resource('material-rancangan', MaterialRancanganController::class);
+
+        // Route Material
+        Route::resource('stage-material', StageMaterialController::class);
 
         // Route Blok
         Route::resource('blok', BlokController::class);
@@ -69,6 +78,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Route Purchase Order Item
         Route::resource('penerimaan-material-item', GoodsReceiptItemController::class);
 
+        // Route Project Stage
+        Route::resource('project-stage', ProjectStagesController::class);
+
+        // Route Stage Material
+        Route::resource('stage-material', StageMaterialController::class);
+
         // stok
         Route::get('/masuk', [StokTransactionController::class, 'stokMasuk'])->name('masuk.index');
         Route::get('/keluar', [StokTransactionController::class, 'stokKeluar'])->name('keluar.index');
@@ -81,5 +96,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // get material with stok
         Route::get('/materials/{id}/stok', [MaterialController::class, 'getStok']);
+
+        Route::prefix('stok-opname')->name('stok-opname.')->group(function () {
+            // 
+            Route::resource('periode', PeriodeStokOpnameController::class);
+            Route::resource('input', ItemStokOpnameController::class);
+        });
     });
 });

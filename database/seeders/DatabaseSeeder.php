@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
+use App\Models\StageMaterial;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -36,6 +37,10 @@ class DatabaseSeeder extends Seeder
             AplikatorSeeder::class,
             BlokSeeder::class,
             // MaterialSeeder::class,
+            MaterialRakitanSeeder::class,
+            MaterialRakitanItemSeeder::class,
+            ProjectStagesSeeder::class,
+            StageMaterialSeeder::class,
             VendorSeeder::class
         ]);
 

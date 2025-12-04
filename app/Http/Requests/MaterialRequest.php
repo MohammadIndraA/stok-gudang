@@ -27,6 +27,11 @@ class MaterialRequest extends FormRequest
             'satuan'        => ['required', 'string', 'max:50'],
             'kategori'      => ['nullable', 'string', 'max:100'],
             'stok_minimum'  => ['required', 'integer', 'min:0'],
+            'current_stock'     => ['required', 'numeric', 'min:0'],
+            'berat_per_satuan'  => ['nullable', 'numeric', 'min:0'],
+            'is_rakitan'        => ['required', 'boolean'],
+            'harga_satuan'      => ['nullable', 'numeric', 'min:0'],
+
         ];
     }
 
@@ -48,6 +53,20 @@ class MaterialRequest extends FormRequest
             'stok_minimum.required'  => 'Stok minimum wajib diisi.',
             'stok_minimum.integer'   => 'Stok minimum harus berupa angka.',
             'stok_minimum.min'       => 'Stok minimum tidak boleh kurang dari 0.',
+
+            'current_stock.required'    => 'Stok saat ini wajib diisi.',
+            'current_stock.numeric'     => 'Stok saat ini harus berupa angka.',
+            'current_stock.min'         => 'Stok saat ini tidak boleh kurang dari 0.',
+
+            'berat_per_satuan.numeric'  => 'Berat per satuan harus berupa angka.',
+            'berat_per_satuan.min'      => 'Berat per satuan tidak boleh kurang dari 0.',
+
+            'is_rakitan.required'       => 'Status rakitan wajib diisi.',
+            'is_rakitan.boolean'        => 'Status rakitan harus berupa true/false.',
+
+            'harga_satuan.numeric'      => 'Harga satuan harus berupa angka.',
+            'harga_satuan.min'          => 'Harga satuan tidak boleh kurang dari 0.',
+
         ];
     }
 }

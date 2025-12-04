@@ -1,14 +1,16 @@
 <?php
 
+// app/Services/PostService.php
 namespace App\Services;
 
-use App\Repositories\GoodsReceiptNoteRepository;
+use App\Repositories\ProjectRepository;
+use App\Repositories\ProjectStagesRepository;
 
-class GoodsReceiptNoteService
+class ProjectStagesService
 {
-    protected GoodsReceiptNoteRepository $repository;
+    protected ProjectStagesRepository $repository;
 
-    public function __construct(GoodsReceiptNoteRepository $repository)
+    public function __construct(ProjectStagesRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -16,16 +18,6 @@ class GoodsReceiptNoteService
     public function getAll()
     {
         return $this->repository->all();
-    }
-
-    public function getPO()
-    {
-        return $this->repository->getPO();
-    }
-
-    public function getMaterial()
-    {
-        return $this->repository->getMaterial();
     }
 
     public function find(string $id)

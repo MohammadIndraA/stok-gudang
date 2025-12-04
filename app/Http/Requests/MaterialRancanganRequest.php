@@ -19,35 +19,23 @@ class MaterialRancanganRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            // kode_material otomatis generate → tidak perlu divalidasi saat create
-            'nama_material' => ['required', 'string', 'max:255', 'unique:material_rancangans,nama_material'],
-            'satuan'        => ['required', 'string', 'max:50'],
-            'kategori'      => ['nullable', 'string', 'max:100'],
-            'stok_minimum'  => ['required', 'integer', 'min:0'],
+            'material_id' => 'required|uuid|unique:material_rakitans,material_id',
+            'keterangan'  => 'nullable|string|max:255',
         ];
     }
 
-    public function messages(): array
+    public function messages()
     {
         return [
-            'nama_material.required' => 'Nama material wajib diisi.',
-            'nama_material.unique' => 'Nama material Sudah Ada.',
-            'nama_material.string'   => 'Nama material harus berupa teks.',
-            'nama_material.max'      => 'Nama material maksimal 255 karakter.',
+            'material_id.required' => 'Material rakitan wajib dipilih.',
+            'material_id.uuid'     => 'Format ID material tidak valid.',
+            'material_id.unique'   => 'Material rakitan ini sudah terdaftar.',
 
-            'satuan.required'        => 'Satuan wajib diisi (contoh: sak, m³, buah).',
-            'satuan.string'          => 'Satuan harus berupa teks.',
-            'satuan.max'             => 'Satuan maksimal 50 karakter.',
-
-            'kategori.string'        => 'Kategori harus berupa teks.',
-            'kategori.max'           => 'Kategori maksimal 100 karakter.',
-
-            'stok_minimum.required'  => 'Stok minimum wajib diisi.',
-            'stok_minimum.integer'   => 'Stok minimum harus berupa angka.',
-            'stok_minimum.min'       => 'Stok minimum tidak boleh kurang dari 0.',
+            'keterangan.string'    => 'Keterangan harus berupa teks.',
+            'keterangan.max'       => 'Keterangan maksimal 255 karakter.',
         ];
     }
 }

@@ -26,6 +26,10 @@ class MaterialRancanganService
         return $this->repository->find($id);
     }
 
+    public function getMaterial()
+    {
+        return $this->repository->getMaterial();
+    }
     public function create(array $data)
     {
 

@@ -35,7 +35,8 @@
     <script src="{{ asset('design-system/assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('design-system/assets/libs/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ asset('design-system/assets/libs/@frostui/tailwindcss/frostui.js') }}"></script>
-
+    <script src="{{ asset('design-system/assets/js/alert.js') }}"></script>
+    <script src="{{ asset('js/alert.js') }}"></script>
     <script src="{{ asset('design-system/assets/js/app.js') }}"></script>
     <!-- JAVASCRIPTS -->
 </body>

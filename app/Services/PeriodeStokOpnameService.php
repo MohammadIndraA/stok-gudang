@@ -1,14 +1,15 @@
 <?php
 
+// app/Services/PostService.php
 namespace App\Services;
 
-use App\Repositories\GoodsReceiptNoteRepository;
+use App\Repositories\PeriodeStokOpnameRepository;
 
-class GoodsReceiptNoteService
+class PeriodeStokOpnameService
 {
-    protected GoodsReceiptNoteRepository $repository;
+    protected PeriodeStokOpnameRepository $repository;
 
-    public function __construct(GoodsReceiptNoteRepository $repository)
+    public function __construct(PeriodeStokOpnameRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -16,16 +17,6 @@ class GoodsReceiptNoteService
     public function getAll()
     {
         return $this->repository->all();
-    }
-
-    public function getPO()
-    {
-        return $this->repository->getPO();
-    }
-
-    public function getMaterial()
-    {
-        return $this->repository->getMaterial();
     }
 
     public function find(string $id)
